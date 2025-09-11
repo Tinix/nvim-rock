@@ -1,40 +1,34 @@
-# Configuración de Neovim
+# Neovim Rock
 
-Este es un proyecto de configuración personalizada para el editor de texto Neovim. Neovim es una versión avanzada y extensible de Vim, que ofrece mejoras en el rendimiento, la extensibilidad y la experiencia de usuario.
+## Neovim Configuration
 
-La estructura del proyecto está bien organizada, con archivos de configuración y plugins separados en directorios lógicos. La configuración cubre aspectos como:
+This is a custom configuration project for the Neovim text editor.
+Neovim is an advanced and extensible version of Vim, offering improvements in performance, extensibility, and user experience.
 
-- Opciones generales de Neovim
-- Atajos de teclado personalizados
-- Eventos automáticos
-- Configuración de plugins para diferentes lenguajes de programación, como Python, Rust, Go, Elixir, entre otros.
+The project’s structure is well organized, with configuration files and plugins separated into logical directories. The configuration covers aspects such as:
 
-En general, el proyecto se encuentra en buenas condiciones, pero hay algunas áreas donde se podrían hacer mejoras, como:
+- General Neovim options
+- Custom keyboard shortcuts
+- Autocommands (automatic events)
+- Plugin configuration for different programming languages, such as **Python**, **Rust**, **Go**, **Elixir**, among others
 
-- Optimizar la configuración de opciones
-- Simplificar la carga de plugins
-- Agregar más funcionalidad a la configuración de los lenguajes
+Overall, the project is in good condition, but there are some areas where improvements could be made, such as:
 
-## Instalación
+- Optimizing option settings
+- Simplifying plugin loading
+- Adding more functionality to language-specific configurations
 
-Para instalar y configurar este proyecto de Neovim, sigue estos pasos:
+---
 
-1. Asegúrate de tener Neovim instalado en tu sistema. Puedes instalarlo siguiendo las instrucciones para tu sistema operativo en la [página oficial de Neovim](https://neovim.io/).
+## 🚀 Installation
 
-2. Clona este repositorio en tu directorio de configuración de Neovim:
+To install and configure this Neovim project, follow these steps:
 
-   ```
-   git clone https://github.com/tu-usuario/configuracion-neovim.git ~/.config/nvim
-   ```
+1. **Make sure you have Neovim installed** on your system.
+   You can install it by following the instructions for your operating system on the [official Neovim page](https://neovim.io/).
 
-3. Copia los archivos de configuración al directorio correcto:
+2. **Clone this repository** into your Neovim configuration directory:
 
-   ```
-   cp -r ~/.config/nvim/lua ~/.config/nvim/
-   cp ~/.config/nvim/init.lua ~/.config/nvim/
-   ```
-
-4. Inicia Neovim y deja que se instalen automáticamente los plugins especificados en la configuración.
-
-¡Listo! Ahora deberías tener Neovim configurado con esta personalización.
+   ```bash
+   git clone https://github.com/Tinix/nvim-rock.git ~/.config/nvim
 
