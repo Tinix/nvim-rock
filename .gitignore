@@ -1,0 +1,17 @@
+# Neovim cache & undo
+undo/
+*.swp
+*.swo
+*.bak
+
+# Mason packages (LSP servers, formatters, etc.)
+mason/
+
+# Lazy.nvim lock file (lo podés versionar si querés fijar versiones)
+lazy-lock.json
+
+# Session & backup files
+session/
+backup/
+
+undo/
