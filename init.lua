@@ -27,22 +27,21 @@ require("config.autocmds")
 require("lazy").setup({ import = "plugins"}, {
   -- Lazy.nvim configuration
   defaults = {
-    lazy = false, -- should plugins be lazy-loaded?
-    version = false, -- always use the latest git commit
+    lazy = false,
+    version = false,
   },
   install = {
     colorscheme = { "tokyonight", "catppuccin", "catppuccin-latte", "gruvbox" },
   },
   checker = {
-    enabled = true, -- automatically check for plugin updates
-    notify = false, -- don't notify about updates
+    enabled = true,
+    notify = false,
   },
   change_detection = {
-    notify = false, -- don't notify about config file changes
+    notify = false,
   },
   performance = {
     rtp = {
-      -- disable some rtp plugins
       disabled_plugins = {
         "gzip",
         "matchit",
@@ -56,3 +55,8 @@ require("lazy").setup({ import = "plugins"}, {
     },
   },
 })
+
+vim.cmd.colorscheme("tokyonight")
+
+
+

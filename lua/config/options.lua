@@ -14,7 +14,6 @@ opt.number = true                        -- Show line numbers
 opt.relativenumber = false                -- Show relative line numbers
 opt.showmatch = true                     -- Show matching brackets
 opt.foldmethod = "marker"                -- Enable folding (space + za to toggle)
-opt.colorcolumn = "80,100,120"                   -- Show column at 80 characters
 opt.splitright = true                    -- Vertical split to the right
 opt.splitbelow = true                    -- Horizontal split to the bottom
 opt.ignorecase = true                    -- Ignore case letters when search
@@ -46,3 +45,7 @@ opt.writebackup = false                  -- Don't write backup
 
 -- Create undo directory if it doesn't exist
 vim.fn.mkdir(vim.fn.expand("~/.config/nvim/undo"), "p")
+
+-- Colorscheme
+-- vim.cmd.colorscheme("tokyonight")
+vim.cmd.colorscheme("catppuccin")

@@ -1,4 +1,5 @@
 -- lua/config/keymaps.lua
+-- lua/config/keymaps.lua
 -- Key mappings configuration
 
 local keymap = vim.keymap
@@ -36,9 +37,20 @@ keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Increase windo
 keymap.set("n", "<S-l>", ":bnext<CR>", { desc = "Next buffer" })
 keymap.set("n", "<S-h>", ":bprevious<CR>", { desc = "Previous buffer" })
 
--- Move text up and down
-keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move text down" })
-keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move text up" })
+keymap.set("n", "<S-A-j>", ":m .+1<CR>==", { noremap = true, silent = true, desc = "Move line down" })
+keymap.set("n", "<S-A-k>", ":m .-2<CR>==", { noremap = true, silent = true, desc = "Move line up" })
+keymap.set("v", "<S-A-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection down" })
+keymap.set("v", "<S-A-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection up" })
+
+keymap.set("n", "<C-S-j>", ":m .+1<CR>==", { noremap = true, silent = true, desc = "Move line down" })
+keymap.set("n", "<C-S-k>", ":m .-2<CR>==", { noremap = true, silent = true, desc = "Move line up" })
+keymap.set("v", "<C-S-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection down" })
+keymap.set("v", "<C-S-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection up" })
+
+keymap.set("n", "<S-A-t>", ":m .+1<CR>==", { noremap = true, silent = true, desc = "Move line down (Dvorak)" })
+keymap.set("n", "<S-A-n>", ":m .-2<CR>==", { noremap = true, silent = true, desc = "Move line up (Dvorak)" })
+keymap.set("v", "<S-A-t>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection down (Dvorak)" })
+keymap.set("v", "<S-A-n>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection up (Dvorak)" })
 
 -- Better indenting
 keymap.set("v", "<", "<gv", { desc = "Indent left" })
@@ -67,3 +79,19 @@ keymap.set("v", "<leader>cf", ":ChatGPTRun fix_bugs<CR>", { desc = "Fix bugs" })
 keymap.set("v", "<leader>cx", ":ChatGPTRun explain_code<CR>", { desc = "Explain code" })
 keymap.set("v", "<leader>cr", ":ChatGPTRun roxygen_edit<CR>", { desc = "Roxygen edit" })
 keymap.set("v", "<leader>cl", ":ChatGPTRun code_readability_analysis<CR>", { desc = "Code readability analysis" })
+
+-- Toggle NvimTree with Ctrl+e
+keymap.set("n", "<C-e>", function()
+  require("nvim-tree.api").tree.toggle()
+end, { noremap = true, silent = true, desc = "Toggle NvimTree" })
+
+-- Remap movement keys for Dvorak: htns
+keymap.set("n", "h", "h", { noremap = true, silent = true })
+keymap.set("n", "t", "j", { noremap = true, silent = true })
+keymap.set("n", "n", "k", { noremap = true, silent = true })
+keymap.set("n", "s", "l", { noremap = true, silent = true })
+
+keymap.set("v", "h", "h", { noremap = true, silent = true })
+keymap.set("v", "t", "j", { noremap = true, silent = true })
+keymap.set("v", "n", "k", { noremap = true, silent = true })
+keymap.set("v", "s", "l", { noremap = true, silent = true })
