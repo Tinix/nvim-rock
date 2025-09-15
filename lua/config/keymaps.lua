@@ -19,7 +19,7 @@ keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit" })
 keymap.set("n", "<leader>Q", ":qa!<CR>", { desc = "Quit all" })
 
 -- Clear highlights
-keymap.set("n", "<Esc>", ":nohlsearch<CR>", { desc = "Clear highlights" })
+-- keymap.set("n", "<Esc>", ":nohlsearch<CR>", { desc = "Clear highlights" })
 
 -- Better window navigation
 keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })

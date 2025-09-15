@@ -1,8 +1,4 @@
--- plugins/ai.lua
--- AI-powered plugins for code assistance
-
 return {
-  -- Avante.nvim - Claude AI assistant (Cursor-like experience)
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
@@ -12,12 +8,20 @@ return {
       provider = "claude",
       providers = {
         claude = {
-          -- IMPORTANTE: base URL sin /v1/messages (Avante lo agrega)
           endpoint = "https://api.anthropic.com",
-          model = "claude-3-haiku-20240307", -- confirmado con curl
+          model = "claude-3-haiku-20240307",
           api_key = os.getenv("ANTHROPIC_API_KEY"),
           extra_request_body = {
             max_tokens = 4096,
+            temperature = 0,
+          },
+        },
+        openai = {
+          endpoint = "https://api.openai.com/v1",
+          model = "gpt-4o-mini",
+          api_key = os.getenv("OPENAI_API_KEY"),
+          extra_request_body = {
+            max_tokens = 2048,
             temperature = 0,
           },
         },
@@ -75,7 +79,6 @@ return {
     },
   },
 
-  -- ChatGPT integration
   {
     "jackMort/ChatGPT.nvim",
     event = "VeryLazy",
@@ -109,7 +112,6 @@ return {
     },
   },
 
-  -- Codeium (free AI completion)
   {
     "Exafunction/codeium.vim",
     event = "BufEnter",
