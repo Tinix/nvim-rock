@@ -20,15 +20,40 @@ return {
       require("telescope").setup()
     end,
   },
+
+  -- {
+  --   "nvim-treesitter/nvim-treesitter",
+  --   build = ":TSUpdate",
+  --   config = function()
+  --     require("nvim-treesitter.configs").setup({
+  --       highlight = { enable = true },
+  --       indent = { enable = true },
+  --     })
+  --   end,
+  -- },
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter.configs").setup({
-        highlight = { enable = true },
+        ensure_installed = {
+          "lua",
+          "elixir",
+          "heex",
+          "eex",
+          "ruby",
+          "javascript",
+          "html",
+          "css"
+        },
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
         indent = { enable = true },
       })
     end,
   },
+  { "nvim-treesitter/playground" }
 }
 
