@@ -20,17 +20,6 @@ return {
       require("telescope").setup()
     end,
   },
-
-  -- {
-  --   "nvim-treesitter/nvim-treesitter",
-  --   build = ":TSUpdate",
-  --   config = function()
-  --     require("nvim-treesitter.configs").setup({
-  --       highlight = { enable = true },
-  --       indent = { enable = true },
-  --     })
-  --   end,
-  -- },
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -51,6 +40,7 @@ return {
           additional_vim_regex_highlighting = false,
         },
         indent = { enable = true },
+        endwise = { enable = true },
       })
     end,
   },

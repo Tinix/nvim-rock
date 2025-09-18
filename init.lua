@@ -56,7 +56,7 @@ require("lazy").setup({ import = "plugins"}, {
   },
 })
 
-vim.cmd.colorscheme("tokyonight")
+vim.cmd.colorscheme("rose-pine-dawn")
 
 
 
