@@ -5,7 +5,7 @@ return {
     lazy = false,
     version = false,
     opts = {
-      provider = "claude",
+      provider = "gemini",
       providers = {
         claude = {
           endpoint = "https://api.anthropic.com",
@@ -24,6 +24,11 @@ return {
             max_tokens = 2048,
             temperature = 0,
           },
+        },
+        gemini = {
+          endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
+          model = "gemini-2.5-pro",
+          api_key = os.getenv("GEMINI_API_KEY"),
         },
       },
       behaviour = {
@@ -61,7 +66,6 @@ return {
       hints = { enabled = true },
       windows = {
         position = "right",
-        wrap = true,
         width = 30,
         sidebar_header = { align = "center", rounded = true },
       },
@@ -112,9 +116,36 @@ return {
     },
   },
 
+  -- Autocompletado inline con Codestral (Mistral). Requiere CODESTRAL_API_KEY.
   {
-    "Exafunction/codeium.vim",
-    event = "BufEnter",
+    "milanglacier/minuet-ai.nvim",
+    event = "InsertEnter",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      provider = "codestral",
+      provider_options = {
+        codestral = {
+          model = "codestral-latest",
+          end_point = "https://codestral.mistral.ai/v1/fim/completions",
+          api_key = "CODESTRAL_API_KEY",
+          stream = true,
+          optional = {
+            max_tokens = 256,
+            stop = { "\n\n" },
+          },
+        },
+      },
+      virtualtext = {
+        auto_trigger_ft = { "*" },
+        keymap = {
+          accept = "<M-l>",
+          accept_line = "<M-L>",
+          next = "<M-]>",
+          prev = "<M-[>",
+          dismiss = "<M-e>",
+        },
+      },
+    },
   },
 }
 

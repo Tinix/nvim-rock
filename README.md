@@ -31,8 +31,10 @@ To install and configure this Neovim project, follow these steps:
 
    ```bash
    git clone https://github.com/Tinix/nvim-rock.git ~/.config/nvim
+   ```
 
-
+3. **Set the AI API keys** you use (for example in `~/.zshrc`):
+   `CODESTRAL_API_KEY` (Minuet), `GEMINI_API_KEY` (Avante), `OPENAI_API_KEY` (ChatGPT.nvim).
 
 # Neovim Keymaps Configuration
 
@@ -48,7 +50,6 @@ To install and configure this Neovim project, follow these steps:
 | `Ctrl+s` | Save | Save current file |
 | `Space+q` | Quit | Close Neovim |
 | `Space+Q` | Force quit | Close all without saving |
-| `Esc` | Clear highlights | Remove search highlights |
 
 ### Window Navigation
 | Key | Action |
@@ -121,6 +122,14 @@ To install and configure this Neovim project, follow these steps:
 | `s` | `l` | Right |
 
 ## 🤖 Artificial Intelligence
+
+### Minuet (inline completion with Codestral)
+| Key | Mode | Action |
+|-----|------|--------|
+| `Alt+l` | Insert | Accept whole suggestion |
+| `Alt+L` | Insert | Accept one line |
+| `Alt+]` / `Alt+[` | Insert | Next / previous suggestion (or request one) |
+| `Alt+e` | Insert | Dismiss suggestion |
 
 ### Avante
 | Key | Action |

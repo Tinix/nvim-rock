@@ -1,5 +1,4 @@
 -- lua/config/keymaps.lua
--- lua/config/keymaps.lua
 -- Key mappings configuration
 
 local keymap = vim.keymap

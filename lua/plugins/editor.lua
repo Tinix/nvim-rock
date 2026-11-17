@@ -4,4 +4,3 @@ return {
   { "windwp/nvim-autopairs", config = true }, -- Autopares de (), [], {}
   { "tpope/vim-surround" },                   -- Surround
 }
-

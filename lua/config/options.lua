@@ -46,6 +46,4 @@ opt.writebackup = false                  -- Don't write backup
 -- Create undo directory if it doesn't exist
 vim.fn.mkdir(vim.fn.expand("~/.config/nvim/undo"), "p")
 
--- Colorscheme
--- vim.cmd.colorscheme("tokyonight")
-vim.cmd.colorscheme("catppuccin")
+-- El colorscheme activo se define en lua/plugins/colorscheme.lua

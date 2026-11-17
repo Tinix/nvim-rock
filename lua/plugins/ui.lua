@@ -1,27 +1,12 @@
 -- lua/plugins/ui.lua
 return {
-  {
-    "nvim-lualine/lualine.nvim",
-    config = function()
-      require("lualine").setup()
-    end,
-  },
+  { "nvim-lualine/lualine.nvim", opts = {} },
   { "nvim-tree/nvim-web-devicons" },
-  {
-    "nvim-tree/nvim-tree.lua",
-    config = function()
-      require("nvim-tree").setup()
-    end,
-  },
-  {
-    "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("telescope").setup()
-    end,
-  },
+  { "nvim-tree/nvim-tree.lua", opts = {} },
   {
     "nvim-treesitter/nvim-treesitter",
+    -- `main` es una reescritura sin `nvim-treesitter.configs`; esta config usa la API de `master`.
+    branch = "master",
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter.configs").setup({
@@ -33,17 +18,14 @@ return {
           "ruby",
           "javascript",
           "html",
-          "css"
+          "css",
         },
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,
         },
         indent = { enable = true },
-        endwise = { enable = true },
       })
     end,
   },
-  { "nvim-treesitter/playground" }
 }
-
