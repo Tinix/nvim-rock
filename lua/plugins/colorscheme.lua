@@ -1,17 +1,10 @@
 -- lua/plugins/colorscheme.lua
--- Tokyo Night es el tema por defecto y el único que carga al inicio.
--- El resto carga con :colorscheme <nombre> o con el selector (<leader>th).
--- El último tema elegido se guarda en stdpath("data")/last_colorscheme.
+-- Batman es el tema por defecto: se aplica SIEMPRE al abrir Neovim.
+-- El resto carga con :colorscheme <nombre> o con el selector (<leader>th),
+-- pero solo dura la sesión actual. La variante de Batman (:Batman <variante>) sí se recuerda.
 
-local default_colorscheme = "tokyonight"
-local state_file = vim.fn.stdpath("data") .. "/last_colorscheme"
-
-local function read_last_colorscheme()
-  local ok, lines = pcall(vim.fn.readfile, state_file)
-  if ok and lines[1] and lines[1] ~= "" then
-    return lines[1]
-  end
-end
+local default_colorscheme = "batman"
+local fallback_colorscheme = "tokyonight"
 
 -- Todos los colorschemes disponibles, incluidos los de plugins lazy todavía no cargados
 -- (el selector de Telescope solo ve los que ya están en el runtimepath).
@@ -31,7 +24,7 @@ local function all_colorschemes()
 end
 
 return {
-  -- Tokyo Night (tema por defecto)
+  -- Tokyo Night (carga al inicio: aplica el tema por defecto y define el selector)
   {
     "folke/tokyonight.nvim",
     lazy = false,
@@ -51,19 +44,9 @@ return {
         },
       })
 
-      -- Guardar el tema elegido
-      vim.api.nvim_create_autocmd("ColorScheme", {
-        group = vim.api.nvim_create_augroup("LastColorscheme", { clear = true }),
-        callback = function(event)
-          pcall(vim.fn.writefile, { event.match }, state_file)
-        end,
-        desc = "Save last colorscheme",
-      })
-
-      -- Cargar el último tema elegido; si no existe, volver a tokyonight
-      local last = read_last_colorscheme()
-      if not (last and pcall(vim.cmd.colorscheme, last)) then
-        vim.cmd.colorscheme(default_colorscheme)
+      -- Siempre arrancar con Batman; si falla (plugin no instalado), usar tokyonight
+      if not pcall(vim.cmd.colorscheme, default_colorscheme) then
+        vim.cmd.colorscheme(fallback_colorscheme)
       end
 
       -- Selector de colorschemes con preview en vivo
@@ -239,6 +222,30 @@ return {
     lazy = true,
     config = function()
       vim.o.background = "dark" -- dark, light
+    end,
+  },
+
+  -- Batman 🦇 (un solo colorscheme "batman" con variantes: arkham, nolan, frank_miller,
+  -- joker_night, two_face, penguin, catwoman, bane, scarecrow, riddler, mr_freeze, ...)
+  -- Cambiar variante: :Batman <variante> (se recuerda), preview interactivo: :BatmanPreview
+  {
+    "the-coding-doggo/batman.nvim",
+    lazy = true,
+    cmd = { "Batman", "BatmanList", "BatmanPreview", "BatmanRestore", "BatmanLspToggle" },
+    opts = {
+      theme = "arkham", -- variante por defecto (:BatmanRestore vuelve a esta)
+      use_persistence = true,
+      transparent_background = false,
+    },
+    config = function(_, opts)
+      -- setup() deja un print("DEBUG: ...") olvidado; lo silenciamos
+      local orig_print = print
+      print = function() end
+      local ok, err = pcall(require("batman").setup, opts)
+      print = orig_print
+      if not ok then
+        vim.notify("batman.nvim: " .. tostring(err), vim.log.levels.ERROR)
+      end
     end,
   },
 

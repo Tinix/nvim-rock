@@ -31,7 +31,7 @@ require("lazy").setup({ import = "plugins"}, {
     version = false,
   },
   install = {
-    colorscheme = { "tokyonight", "catppuccin", "catppuccin-latte", "gruvbox" },
+    colorscheme = { "batman", "tokyonight", "catppuccin", "catppuccin-latte", "gruvbox" },
   },
   checker = {
     enabled = true,
