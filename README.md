@@ -10,13 +10,7 @@ The project’s structure is well organized, with configuration files and plugin
 - General Neovim options
 - Custom keyboard shortcuts
 - Autocommands (automatic events)
-- Plugin configuration for different programming languages, such as **Python**, **Rust**, **Go**, **Elixir**, among others
-
-Overall, the project is in good condition, but there are some areas where improvements could be made, such as:
-
-- Optimizing option settings
-- Simplifying plugin loading
-- Adding more functionality to language-specific configurations
+- Plugin configuration
 
 ---
 
@@ -33,8 +27,14 @@ To install and configure this Neovim project, follow these steps:
    git clone https://github.com/Tinix/nvim-rock.git ~/.config/nvim
    ```
 
-3. **Set the AI API keys** you use (for example in `~/.zshrc`):
-   `CODESTRAL_API_KEY` (Minuet), `GEMINI_API_KEY` (Avante), `OPENAI_API_KEY` (ChatGPT.nvim).
+3. **Install the external tools**:
+   - [fd](https://github.com/sharkdp/fd): the binary can be `fdfind` (Debian/Ubuntu) or `fd`. Without it, Telescope uses its default finder.
+   - `make` and a C compiler, to build telescope-fzf-native.
+   - Node.js 20 or newer, for Copilot.
+
+4. **Set `OPENAI_API_KEY`** (for example in `~/.zshrc`), used by Avante and ChatGPT.nvim.
+
+5. **Sign in to Copilot** by running `:Copilot auth` inside Neovim.
 
 # Neovim Keymaps Configuration
 
@@ -123,13 +123,17 @@ To install and configure this Neovim project, follow these steps:
 
 ## 🤖 Artificial Intelligence
 
-### Minuet (inline completion with Codestral)
+### Copilot (inline completion)
+Disabled for Markdown, YAML, git commit and help files.
+
 | Key | Mode | Action |
 |-----|------|--------|
-| `Alt+l` | Insert | Accept whole suggestion |
-| `Alt+L` | Insert | Accept one line |
-| `Alt+]` / `Alt+[` | Insert | Next / previous suggestion (or request one) |
+| `Tab` | Insert | Accept suggestion, or insert a tab if there is none |
+| `Alt+A` | Insert | Accept whole suggestion |
+| `Alt+a` | Insert | Accept one line |
+| `Alt+n` / `Alt+p` | Insert | Next / previous suggestion |
 | `Alt+e` | Insert | Dismiss suggestion |
+| `Space+ct` | Normal | Toggle Copilot |
 
 ### Avante
 | Key | Action |
