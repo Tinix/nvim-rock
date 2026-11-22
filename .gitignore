@@ -13,3 +13,4 @@ lazy-lock.json
 # Session & backup files
 session/
 backup/
+.secrets/
