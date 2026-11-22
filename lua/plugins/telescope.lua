@@ -1,4 +1,6 @@
 -- lua/plugins/telescope.lua
+local fd = vim.fn.executable("fdfind") == 1 and "fdfind" or vim.fn.executable("fd") == 1 and "fd" or nil
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -10,14 +12,16 @@ return {
     opts = {
       pickers = {
         find_files = {
-          find_command = {
-            "fdfind", "--type", "f", "--hidden", "--strip-cwd-prefix",
+          hidden = not fd,
+          file_ignore_patterns = { "^%.git/", "^%./%.git/" },
+          find_command = fd and {
+            fd, "--type", "f", "--hidden", "--strip-cwd-prefix",
             "--exclude", ".git",
             "--exclude", "deps",
             "--exclude", "_build",
             "--exclude", "target",
             "--exclude", "node_modules",
-          },
+          } or nil,
         },
       },
     },
