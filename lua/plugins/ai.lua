@@ -102,8 +102,6 @@ return {
     },
   },
 
-  -- Autocompletado inline con GitHub Copilot (plan Free: 2000 completions/mes).
-  -- Requiere Node >= 20 en el PATH. Primera vez: :Copilot auth
   {
     "zbirenbaum/copilot.lua",
     event = "InsertEnter",
@@ -117,7 +115,7 @@ return {
         auto_trigger = true,
         debounce = 150,
         keymap = {
-          accept = false, -- <Tab> se mapea abajo, con fallback a tab normal
+          accept = false,
           accept_line = "<M-a>",
           accept_word = false,
           next = "<M-n>",
@@ -126,7 +124,6 @@ return {
         },
       },
       panel = { enabled = false },
-      -- Deshabilitado donde no aporta, para no gastar cuota
       filetypes = {
         markdown = false,
         gitcommit = false,
@@ -138,7 +135,6 @@ return {
     config = function(_, opts)
       require("copilot").setup(opts)
       local suggestion = require("copilot.suggestion")
-      -- Tab acepta la sugerencia de Copilot si hay una visible; si no, inserta un tab normal
       vim.keymap.set("i", "<Tab>", function()
         if suggestion.is_visible() then
           suggestion.accept()

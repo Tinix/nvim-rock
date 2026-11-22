@@ -1,10 +1,9 @@
--- lua/plugins/lsp.lua
 return {
   { "neovim/nvim-lspconfig" },
   { "williamboman/mason.nvim", config = true },
   { "williamboman/mason-lspconfig.nvim", config = true },
   {
-    "hrsh7th/nvim-cmp", -- Autocompletion
+    "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
@@ -32,4 +31,3 @@ return {
     end,
   },
 }
-

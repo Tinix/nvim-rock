@@ -1,13 +1,8 @@
--- lua/config/autocmds.lua
--- Autocommands configuration
-
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
--- General settings
 local general = augroup("General", { clear = true })
 
--- Highlight on yank
 autocmd("TextYankPost", {
   group = general,
   pattern = "*",
@@ -17,7 +12,6 @@ autocmd("TextYankPost", {
   desc = "Highlight on yank",
 })
 
--- Remove whitespace on save
 autocmd("BufWritePre", {
   group = general,
   pattern = "*",
@@ -25,7 +19,6 @@ autocmd("BufWritePre", {
   desc = "Remove trailing whitespace on save",
 })
 
--- Don't auto comment new lines
 autocmd("BufEnter", {
   group = general,
   pattern = "*",
@@ -33,7 +26,6 @@ autocmd("BufEnter", {
   desc = "Don't auto comment new lines",
 })
 
--- Restore cursor position
 autocmd("BufReadPost", {
   group = general,
   pattern = "*",
@@ -46,7 +38,6 @@ autocmd("BufReadPost", {
   desc = "Restore cursor position",
 })
 
--- Auto create dir when saving a file, in case some intermediate directory does not exist
 autocmd("BufWritePre", {
   group = general,
   callback = function(event)

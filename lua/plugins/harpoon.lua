@@ -1,5 +1,3 @@
--- lua/plugins/harpoon.lua
--- Harpoon (Mark & Quick Nav)
 return {
   {
     "ThePrimeagen/harpoon",
@@ -9,7 +7,6 @@ return {
       local harpoon = require("harpoon")
       harpoon:setup()
 
-      -- Keymaps para Harpoon
       vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end, { desc = "Harpoon Add File" })
       vim.keymap.set("n", "<leader>hm", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon Menu" })
 

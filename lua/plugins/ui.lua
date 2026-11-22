@@ -1,11 +1,9 @@
--- lua/plugins/ui.lua
 return {
   { "nvim-lualine/lualine.nvim", opts = {} },
   { "nvim-tree/nvim-web-devicons" },
   { "nvim-tree/nvim-tree.lua", opts = {} },
   {
     "nvim-treesitter/nvim-treesitter",
-    -- `main` es una reescritura sin `nvim-treesitter.configs`; esta config usa la API de `master`.
     branch = "master",
     build = ":TSUpdate",
     config = function()

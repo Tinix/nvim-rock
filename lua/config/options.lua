@@ -1,49 +1,37 @@
--- lua/config/options.lua
--- Vim options configuration
-
 local opt = vim.opt
 
--- General
-opt.mouse = "a"                          -- Enable mouse support
-opt.clipboard = "unnamedplus"            -- Use system clipboard
-opt.swapfile = false                     -- Don't use swapfile
-opt.completeopt = "menuone,noinsert,noselect" -- Completion options
+opt.mouse = "a"
+opt.clipboard = "unnamedplus"
+opt.swapfile = false
+opt.completeopt = "menuone,noinsert,noselect"
 
--- Appearance
-opt.number = true                        -- Show line numbers
-opt.relativenumber = false                -- Show relative line numbers
-opt.showmatch = true                     -- Show matching brackets
-opt.foldmethod = "marker"                -- Enable folding (space + za to toggle)
-opt.splitright = true                    -- Vertical split to the right
-opt.splitbelow = true                    -- Horizontal split to the bottom
-opt.ignorecase = true                    -- Ignore case letters when search
-opt.smartcase = true                     -- Ignore lowercase for the whole pattern
-opt.linebreak = true                     -- Wrap on word boundary
-opt.termguicolors = true                 -- Enable true colors support
-opt.signcolumn = "yes"                   -- Always show signcolumn
+opt.number = true
+opt.relativenumber = false
+opt.showmatch = true
+opt.foldmethod = "marker"
+opt.splitright = true
+opt.splitbelow = true
+opt.ignorecase = true
+opt.smartcase = true
+opt.linebreak = true
+opt.termguicolors = true
+opt.signcolumn = "yes"
 
--- Tabs and indentation
-opt.expandtab = true                     -- Use spaces instead of tabs
-opt.shiftwidth = 2                       -- Shift 2 spaces when tab
-opt.tabstop = 2                          -- 1 tab == 2 spaces
-opt.smartindent = true                   -- Autoindent new lines
-opt.wrap = false                         -- Don't wrap lines
+opt.expandtab = true
+opt.shiftwidth = 2
+opt.tabstop = 2
+opt.smartindent = true
+opt.wrap = false
 
--- Search
-opt.incsearch = true                     -- Show search results as you type
-opt.hlsearch = true                      -- Highlight search results
+opt.incsearch = true
+opt.hlsearch = true
 
--- Performance
-opt.updatetime = 250                     -- Faster completion (default 4000ms)
-opt.timeoutlen = 500                     -- Time to wait for a mapped key sequence (ms)
+opt.updatetime = 250
+opt.timeoutlen = 500
 
--- Undo and backup
-opt.undofile = true                      -- Enable persistent undo
+opt.undofile = true
 opt.undodir = vim.fn.expand("~/.config/nvim/undo")
-opt.backup = false                       -- Don't store backup
-opt.writebackup = false                  -- Don't write backup
+opt.backup = false
+opt.writebackup = false
 
--- Create undo directory if it doesn't exist
 vim.fn.mkdir(vim.fn.expand("~/.config/nvim/undo"), "p")
-
--- El colorscheme activo se define en lua/plugins/colorscheme.lua

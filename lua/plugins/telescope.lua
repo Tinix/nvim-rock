@@ -1,4 +1,3 @@
--- lua/plugins/telescope.lua
 local fd = vim.fn.executable("fdfind") == 1 and "fdfind" or vim.fn.executable("fd") == 1 and "fd" or nil
 
 return {

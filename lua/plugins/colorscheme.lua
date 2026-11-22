@@ -1,13 +1,6 @@
--- lua/plugins/colorscheme.lua
--- Batman es el tema por defecto: se aplica SIEMPRE al abrir Neovim.
--- El resto carga con :colorscheme <nombre> o con el selector (<leader>th),
--- pero solo dura la sesión actual. La variante de Batman (:Batman <variante>) sí se recuerda.
-
 local default_colorscheme = "batman"
 local fallback_colorscheme = "tokyonight"
 
--- Todos los colorschemes disponibles, incluidos los de plugins lazy todavía no cargados
--- (el selector de Telescope solo ve los que ya están en el runtimepath).
 local function all_colorschemes()
   local names = {}
   for _, plugin in pairs(require("lazy.core.config").plugins) do
@@ -24,14 +17,13 @@ local function all_colorschemes()
 end
 
 return {
-  -- Tokyo Night (carga al inicio: aplica el tema por defecto y define el selector)
   {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     config = function()
       require("tokyonight").setup({
-        style = "night", -- night, storm, day, moon
+        style = "night",
         transparent = false,
         terminal_colors = true,
         plugins = {
@@ -44,26 +36,23 @@ return {
         },
       })
 
-      -- Siempre arrancar con Batman; si falla (plugin no instalado), usar tokyonight
       if not pcall(vim.cmd.colorscheme, default_colorscheme) then
         vim.cmd.colorscheme(fallback_colorscheme)
       end
 
-      -- Selector de colorschemes con preview en vivo
       vim.keymap.set("n", "<leader>th", function()
         require("telescope.builtin").colorscheme({ enable_preview = true, colors = all_colorschemes() })
       end, { desc = "Theme picker" })
     end,
   },
 
-  -- Catppuccin
   {
     "catppuccin/nvim",
     name = "catppuccin",
     lazy = true,
     config = function()
       require("catppuccin").setup({
-        flavour = "mocha", -- latte, frappe, macchiato, mocha
+        flavour = "mocha",
         transparent_background = false,
         term_colors = true,
         integrations = {
@@ -77,19 +66,17 @@ return {
     end,
   },
 
-  -- Sonokai
   {
     "sainnhe/sonokai",
     lazy = true,
     config = function()
-      vim.g.sonokai_style = "default" -- default, atlantis, andromeda, shusia, maia, espresso
+      vim.g.sonokai_style = "default"
       vim.g.sonokai_transparent_background = 0
       vim.g.sonokai_enable_italic = 1
       vim.g.sonokai_disable_italic_comment = 0
     end,
   },
 
-  -- Gruvbox
   {
     "ellisonleao/gruvbox.nvim",
     lazy = true,
@@ -112,7 +99,7 @@ return {
         invert_tabline = false,
         invert_intend_guides = false,
         inverse = true,
-        contrast = "", -- hard, soft o ""
+        contrast = "",
         palette_overrides = {},
         overrides = {},
         dim_inactive = false,
@@ -121,7 +108,6 @@ return {
     end,
   },
 
-  -- Dracula
   {
     "Mofiqul/dracula.nvim",
     lazy = true,
@@ -133,7 +119,6 @@ return {
     end,
   },
 
-  -- Nord
   {
     "shaunsingh/nord.nvim",
     lazy = true,
@@ -147,7 +132,6 @@ return {
     end,
   },
 
-  -- Nightfox
   {
     "EdenEast/nightfox.nvim",
     lazy = true,
@@ -163,14 +147,13 @@ return {
     end,
   },
 
-  -- Rose Pine
   {
     "rose-pine/neovim",
     name = "rose-pine",
     lazy = true,
     config = function()
       require("rose-pine").setup({
-        variant = "auto", -- auto, main, moon, dawn
+        variant = "auto",
         dark_variant = "main",
         bold_vert_split = false,
         dim_nc_background = false,
@@ -180,8 +163,6 @@ return {
     end,
   },
 
-  -- Kanagawa (incluye siempre los highlights de telescope, nvim-tree, cmp,
-  -- gitsigns y treesitter, y su propio tema de lualine; no tiene toggles por plugin)
   {
     "rebelot/kanagawa.nvim",
     lazy = true,
@@ -201,13 +182,12 @@ return {
     end,
   },
 
-  -- Onedark
   {
     "navarasu/onedark.nvim",
     lazy = true,
     config = function()
       require("onedark").setup({
-        style = "dark", -- dark, darker, cool, deep, warm, warmer, light
+        style = "dark",
         transparent = false,
         term_colors = true,
         ending_tildes = false,
@@ -216,29 +196,24 @@ return {
     end,
   },
 
-  -- Solarized
   {
     "ishan9299/nvim-solarized-lua",
     lazy = true,
     config = function()
-      vim.o.background = "dark" -- dark, light
+      vim.o.background = "dark"
     end,
   },
 
-  -- Batman 🦇 (un solo colorscheme "batman" con variantes: arkham, nolan, frank_miller,
-  -- joker_night, two_face, penguin, catwoman, bane, scarecrow, riddler, mr_freeze, ...)
-  -- Cambiar variante: :Batman <variante> (se recuerda), preview interactivo: :BatmanPreview
   {
     "the-coding-doggo/batman.nvim",
     lazy = true,
     cmd = { "Batman", "BatmanList", "BatmanPreview", "BatmanRestore", "BatmanLspToggle" },
     opts = {
-      theme = "arkham", -- variante por defecto (:BatmanRestore vuelve a esta)
+      theme = "arkham",
       use_persistence = true,
       transparent_background = false,
     },
     config = function(_, opts)
-      -- setup() deja un print("DEBUG: ...") olvidado; lo silenciamos
       local orig_print = print
       print = function() end
       local ok, err = pcall(require("batman").setup, opts)
@@ -249,15 +224,13 @@ return {
     end,
   },
 
-  -- Temas sin configuración extra
   { "sainnhe/everforest", lazy = true },
   { "sainnhe/gruvbox-material", lazy = true },
   { "craftzdog/solarized-osaka.nvim", lazy = true },
   { "scottmckendry/cyberdream.nvim", lazy = true },
-  -- build = false: el Lua ya viene compilado; el rockspec pide fennel + Lua 5.1 sin necesidad
   { "nyoom-engineering/oxocarbon.nvim", lazy = true, build = false },
   { "AlexvZyl/nordic.nvim", lazy = true },
-  { "projekt0n/github-nvim-theme", lazy = true }, -- github_dark, github_light, ...
+  { "projekt0n/github-nvim-theme", lazy = true },
   { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = true },
   { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = true },
   { "oxfist/night-owl.nvim", lazy = true },
