@@ -35,7 +35,7 @@ opt.hlsearch = true                      -- Highlight search results
 
 -- Performance
 opt.updatetime = 250                     -- Faster completion (default 4000ms)
-opt.timeoutlen = 300                     -- Faster key sequence completion
+opt.timeoutlen = 500                     -- Time to wait for a mapped key sequence (ms)
 
 -- Undo and backup
 opt.undofile = true                      -- Enable persistent undo
