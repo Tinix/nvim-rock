@@ -30,7 +30,6 @@ To install and configure this Neovim project, follow these steps:
 3. **Install the external tools**:
    - [fd](https://github.com/sharkdp/fd): the binary can be `fdfind` (Debian/Ubuntu) or `fd`. Without it, Telescope uses its default finder.
    - `make` and a C compiler, to build telescope-fzf-native.
-   - Node.js 20 or newer, for Copilot.
 
 4. **Set `OPENAI_API_KEY`** (for example in `~/.zshrc`), used by Avante and ChatGPT.nvim.
 
