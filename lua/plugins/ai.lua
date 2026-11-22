@@ -5,17 +5,8 @@ return {
     lazy = false,
     version = false,
     opts = {
-      provider = "gemini",
+      provider = "openai",
       providers = {
-        claude = {
-          endpoint = "https://api.anthropic.com",
-          model = "claude-3-haiku-20240307",
-          api_key = os.getenv("ANTHROPIC_API_KEY"),
-          extra_request_body = {
-            max_tokens = 4096,
-            temperature = 0,
-          },
-        },
         openai = {
           endpoint = "https://api.openai.com/v1",
           model = "gpt-4o-mini",
@@ -24,11 +15,6 @@ return {
             max_tokens = 2048,
             temperature = 0,
           },
-        },
-        gemini = {
-          endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
-          model = "gemini-2.5-pro",
-          api_key = os.getenv("GEMINI_API_KEY"),
         },
       },
       behaviour = {
@@ -116,36 +102,51 @@ return {
     },
   },
 
-  -- Autocompletado inline con Codestral (Mistral). Requiere CODESTRAL_API_KEY.
+  -- Autocompletado inline con GitHub Copilot (plan Free: 2000 completions/mes).
+  -- Requiere Node >= 20 en el PATH. Primera vez: :Copilot auth
   {
-    "milanglacier/minuet-ai.nvim",
+    "zbirenbaum/copilot.lua",
     event = "InsertEnter",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    cmd = "Copilot",
+    keys = {
+      { "<leader>ct", "<cmd>Copilot toggle<CR>", mode = "n", desc = "Copilot toggle" },
+    },
     opts = {
-      provider = "codestral",
-      provider_options = {
-        codestral = {
-          model = "codestral-latest",
-          end_point = "https://codestral.mistral.ai/v1/fim/completions",
-          api_key = "CODESTRAL_API_KEY",
-          stream = true,
-          optional = {
-            max_tokens = 256,
-            stop = { "\n\n" },
-          },
-        },
-      },
-      virtualtext = {
-        auto_trigger_ft = { "*" },
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        debounce = 150,
         keymap = {
-          accept = "<M-l>",
-          accept_line = "<M-L>",
-          next = "<M-]>",
-          prev = "<M-[>",
+          accept = false, -- <Tab> se mapea abajo, con fallback a tab normal
+          accept_line = "<M-a>",
+          accept_word = false,
+          next = "<M-n>",
+          prev = "<M-p>",
           dismiss = "<M-e>",
         },
       },
+      panel = { enabled = false },
+      -- Deshabilitado donde no aporta, para no gastar cuota
+      filetypes = {
+        markdown = false,
+        gitcommit = false,
+        yaml = false,
+        help = false,
+        ["."] = false,
+      },
     },
+    config = function(_, opts)
+      require("copilot").setup(opts)
+      local suggestion = require("copilot.suggestion")
+      -- Tab acepta la sugerencia de Copilot si hay una visible; si no, inserta un tab normal
+      vim.keymap.set("i", "<Tab>", function()
+        if suggestion.is_visible() then
+          suggestion.accept()
+        else
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+        end
+      end, { desc = "Copilot accept / Tab" })
+      vim.keymap.set("i", "<M-A>", suggestion.accept, { desc = "Copilot accept" })
+    end,
   },
 }
-
