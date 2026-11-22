@@ -1,4 +1,3 @@
--- lua/plugins/git.lua
 return {
   {
     "tpope/vim-fugitive",
@@ -13,4 +12,3 @@ return {
     },
   },
 }
-

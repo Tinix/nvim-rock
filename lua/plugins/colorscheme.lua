@@ -1,56 +1,85 @@
--- lua/plugins/colorscheme.lua
+local default_colorscheme = "batman"
+local fallback_colorscheme = "tokyonight"
+
+local function all_colorschemes()
+  local names = {}
+  for _, plugin in pairs(require("lazy.core.config").plugins) do
+    for _, file in ipairs(vim.fn.glob(plugin.dir .. "/colors/*.{vim,lua}", false, true)) do
+      names[vim.fn.fnamemodify(file, ":t:r")] = true
+    end
+  end
+  for _, name in ipairs(vim.fn.getcompletion("", "color")) do
+    names[name] = true
+  end
+  local list = vim.tbl_keys(names)
+  table.sort(list)
+  return list
+end
+
 return {
-  -- Tokyo Night (Tema oscuro moderno)
   {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     config = function()
       require("tokyonight").setup({
-        style = "night", -- night, storm, day, moon
+        style = "night",
         transparent = false,
         terminal_colors = true,
+        plugins = {
+          auto = true,
+          telescope = true,
+          ["nvim-tree"] = true,
+          cmp = true,
+          gitsigns = true,
+          treesitter = true,
+        },
       })
-      -- Descomenta la línea de abajo para activar este theme por defecto
-      -- vim.cmd.colorscheme("tokyonight")
+
+      if not pcall(vim.cmd.colorscheme, default_colorscheme) then
+        vim.cmd.colorscheme(fallback_colorscheme)
+      end
+
+      vim.keymap.set("n", "<leader>th", function()
+        require("telescope.builtin").colorscheme({ enable_preview = true, colors = all_colorschemes() })
+      end, { desc = "Theme picker" })
     end,
   },
 
-  -- Catppuccin
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     config = function()
       require("catppuccin").setup({
-        flavour = "mocha", -- latte, frappe, macchiato, mocha
+        flavour = "mocha",
         transparent_background = false,
         term_colors = true,
+        integrations = {
+          telescope = { enabled = true },
+          nvimtree = true,
+          cmp = true,
+          gitsigns = true,
+          treesitter = true,
+        },
       })
     end,
   },
 
-  -- Sonokai
   {
     "sainnhe/sonokai",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     config = function()
-      vim.g.sonokai_style = "default" -- default, atlantis, andromeda, shusia, maia, espresso
+      vim.g.sonokai_style = "default"
       vim.g.sonokai_transparent_background = 0
       vim.g.sonokai_enable_italic = 1
       vim.g.sonokai_disable_italic_comment = 0
-      -- Activa Sonokai por defecto
-      vim.cmd.colorscheme("sonokai")
     end,
   },
 
-  -- Gruvbox
   {
     "ellisonleao/gruvbox.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     config = function()
       require("gruvbox").setup({
         terminal_colors = true,
@@ -70,7 +99,7 @@ return {
         invert_tabline = false,
         invert_intend_guides = false,
         inverse = true,
-        contrast = "", -- hard, soft o ""
+        contrast = "",
         palette_overrides = {},
         overrides = {},
         dim_inactive = false,
@@ -79,11 +108,9 @@ return {
     end,
   },
 
-  -- Dracula
   {
     "Mofiqul/dracula.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     config = function()
       require("dracula").setup({
         transparent_bg = false,
@@ -92,11 +119,9 @@ return {
     end,
   },
 
-  -- Nord
   {
     "shaunsingh/nord.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     config = function()
       vim.g.nord_contrast = true
       vim.g.nord_borders = false
@@ -107,11 +132,9 @@ return {
     end,
   },
 
-  -- Nightfox
   {
     "EdenEast/nightfox.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     config = function()
       require("nightfox").setup({
         options = {
@@ -119,20 +142,18 @@ return {
           terminal_colors = true,
           dim_inactive = false,
           module_default = true,
-        }
+        },
       })
     end,
   },
 
-  -- Rose Pine
   {
     "rose-pine/neovim",
     name = "rose-pine",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     config = function()
       require("rose-pine").setup({
-        variant = "auto", -- auto, main, moon, dawn
+        variant = "auto",
         dark_variant = "main",
         bold_vert_split = false,
         dim_nc_background = false,
@@ -142,18 +163,16 @@ return {
     end,
   },
 
-  -- Kanagawa
   {
     "rebelot/kanagawa.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     config = function()
       require("kanagawa").setup({
         compile = false,
         undercurl = true,
         commentStyle = { italic = true },
         functionStyle = {},
-        keywordStyle = { italic = true},
+        keywordStyle = { italic = true },
         statementStyle = { bold = true },
         typeStyle = {},
         transparent = false,
@@ -163,14 +182,12 @@ return {
     end,
   },
 
-  -- Onedark
   {
     "navarasu/onedark.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     config = function()
       require("onedark").setup({
-        style = "dark", -- dark, darker, cool, deep, warm, warmer, light
+        style = "dark",
         transparent = false,
         term_colors = true,
         ending_tildes = false,
@@ -179,14 +196,45 @@ return {
     end,
   },
 
-  -- Solarized
   {
     "ishan9299/nvim-solarized-lua",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     config = function()
-        vim.o.background = "dark", -- dark, light
-        vim.cmd.colorscheme("solarized")
+      vim.o.background = "dark"
     end,
   },
+
+  {
+    "the-coding-doggo/batman.nvim",
+    lazy = true,
+    cmd = { "Batman", "BatmanList", "BatmanPreview", "BatmanRestore", "BatmanLspToggle" },
+    opts = {
+      theme = "arkham",
+      use_persistence = true,
+      transparent_background = false,
+    },
+    config = function(_, opts)
+      local orig_print = print
+      print = function() end
+      local ok, err = pcall(require("batman").setup, opts)
+      print = orig_print
+      if not ok then
+        vim.notify("batman.nvim: " .. tostring(err), vim.log.levels.ERROR)
+      end
+    end,
+  },
+
+  { "sainnhe/everforest", lazy = true },
+  { "sainnhe/gruvbox-material", lazy = true },
+  { "craftzdog/solarized-osaka.nvim", lazy = true },
+  { "scottmckendry/cyberdream.nvim", lazy = true },
+  { "nyoom-engineering/oxocarbon.nvim", lazy = true, build = false },
+  { "AlexvZyl/nordic.nvim", lazy = true },
+  { "projekt0n/github-nvim-theme", lazy = true },
+  { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = true },
+  { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = true },
+  { "oxfist/night-owl.nvim", lazy = true },
+  { "savq/melange-nvim", lazy = true },
+  { "loctvl842/monokai-pro.nvim", lazy = true },
+  { "tiagovla/tokyodark.nvim", lazy = true },
 }

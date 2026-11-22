@@ -5,17 +5,8 @@ return {
     lazy = false,
     version = false,
     opts = {
-      provider = "claude",
+      provider = "openai",
       providers = {
-        claude = {
-          endpoint = "https://api.anthropic.com",
-          model = "claude-3-haiku-20240307",
-          api_key = os.getenv("ANTHROPIC_API_KEY"),
-          extra_request_body = {
-            max_tokens = 4096,
-            temperature = 0,
-          },
-        },
         openai = {
           endpoint = "https://api.openai.com/v1",
           model = "gpt-4o-mini",
@@ -61,7 +52,6 @@ return {
       hints = { enabled = true },
       windows = {
         position = "right",
-        wrap = true,
         width = 30,
         sidebar_header = { align = "center", rounded = true },
       },
@@ -113,8 +103,46 @@ return {
   },
 
   {
-    "Exafunction/codeium.vim",
-    event = "BufEnter",
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    cmd = "Copilot",
+    keys = {
+      { "<leader>ct", "<cmd>Copilot toggle<CR>", mode = "n", desc = "Copilot toggle" },
+    },
+    opts = {
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        debounce = 150,
+        keymap = {
+          accept = false,
+          accept_line = "<M-a>",
+          accept_word = false,
+          next = "<M-n>",
+          prev = "<M-p>",
+          dismiss = "<M-e>",
+        },
+      },
+      panel = { enabled = false },
+      filetypes = {
+        markdown = false,
+        gitcommit = false,
+        yaml = false,
+        help = false,
+        ["."] = false,
+      },
+    },
+    config = function(_, opts)
+      require("copilot").setup(opts)
+      local suggestion = require("copilot.suggestion")
+      vim.keymap.set("i", "<Tab>", function()
+        if suggestion.is_visible() then
+          suggestion.accept()
+        else
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+        end
+      end, { desc = "Copilot accept / Tab" })
+      vim.keymap.set("i", "<M-A>", suggestion.accept, { desc = "Copilot accept" })
+    end,
   },
 }
-
