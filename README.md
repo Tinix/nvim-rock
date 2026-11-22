@@ -5,7 +5,7 @@
 This is a custom configuration project for the Neovim text editor.
 Neovim is an advanced and extensible version of Vim, offering improvements in performance, extensibility, and user experience.
 
-The project’s structure is well organized, with configuration files and plugins separated into logical directories. The configuration covers aspects such as:
+The configuration covers aspects such as:
 
 - General Neovim options
 - Custom keyboard shortcuts
