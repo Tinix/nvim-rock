@@ -43,11 +43,6 @@ keymap.set("v", ">", ">gv", { desc = "Indent right" })
 
 keymap.set("v", "p", '"_dP', { desc = "Paste without yanking" })
 
-keymap.set("n", "<leader>aa", ":AvanteAsk<CR>", { desc = "Avante Ask" })
-keymap.set("v", "<leader>ae", ":AvanteEdit<CR>", { desc = "Avante Edit" })
-keymap.set("n", "<leader>ar", ":AvanteRefresh<CR>", { desc = "Avante Refresh" })
-keymap.set("n", "<leader>at", ":AvanteToggle<CR>", { desc = "Avante Toggle" })
-
 keymap.set("n", "<leader>cc", ":ChatGPT<CR>", { desc = "ChatGPT" })
 keymap.set("v", "<leader>ce", ":ChatGPTEditWithInstruction<CR>", { desc = "Edit with instruction" })
 keymap.set("v", "<leader>cg", ":ChatGPTRun grammar_correction<CR>", { desc = "Grammar correction" })

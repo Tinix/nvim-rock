@@ -28,6 +28,7 @@ opt.hlsearch = true
 
 opt.updatetime = 250
 opt.timeoutlen = 500
+opt.report = 9999
 
 opt.undofile = true
 opt.undodir = vim.fn.expand("~/.config/nvim/undo")
