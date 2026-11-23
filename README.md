@@ -31,9 +31,7 @@ To install and configure this Neovim project, follow these steps:
    - [fd](https://github.com/sharkdp/fd): the binary can be `fdfind` (Debian/Ubuntu) or `fd`. Without it, Telescope uses its default finder.
    - `make` and a C compiler, to build telescope-fzf-native.
 
-4. **Set `OPENAI_API_KEY`** (for example in `~/.zshrc`), used by Avante and ChatGPT.nvim.
-
-5. **Sign in to Copilot** by running `:Copilot auth` inside Neovim.
+4. **Set `OPENAI_API_KEY`** (for example in `~/.zshrc`), used by ChatGPT.nvim.
 
 # Neovim Keymaps Configuration
 
@@ -121,26 +119,6 @@ To install and configure this Neovim project, follow these steps:
 | `s` | `l` | Right |
 
 ## 🤖 Artificial Intelligence
-
-### Copilot (inline completion)
-Disabled for Markdown, YAML, git commit and help files.
-
-| Key | Mode | Action |
-|-----|------|--------|
-| `Tab` | Insert | Accept suggestion, or insert a tab if there is none |
-| `Alt+A` | Insert | Accept whole suggestion |
-| `Alt+a` | Insert | Accept one line |
-| `Alt+n` / `Alt+p` | Insert | Next / previous suggestion |
-| `Alt+e` | Insert | Dismiss suggestion |
-| `Space+ct` | Normal | Toggle Copilot |
-
-### Avante
-| Key | Action |
-|-----|--------|
-| `Space+aa` | Avante Ask |
-| `Space+ae` | Avante Edit (Visual) |
-| `Space+ar` | Avante Refresh |
-| `Space+at` | Avante Toggle |
 
 ### ChatGPT
 | Key | Mode | Action |

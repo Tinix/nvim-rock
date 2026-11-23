@@ -7,9 +7,18 @@ autocmd("TextYankPost", {
   group = general,
   pattern = "*",
   callback = function()
-    vim.hl.on_yank({ higroup = "IncSearch", timeout = 200 })
+    vim.hl.on_yank({ higroup = "IncSearch", timeout = 200, on_visual = false })
   end,
   desc = "Highlight on yank",
+})
+
+autocmd("ColorScheme", {
+  group = general,
+  pattern = "sonokai",
+  callback = function()
+    vim.api.nvim_set_hl(0, "Visual", { bg = "#3b4048" })
+  end,
+  desc = "Visible visual selection on Sonokai",
 })
 
 autocmd("BufWritePre", {
